@@ -14,4 +14,10 @@ VALUES  ("Lawyer", 120000.00, 4),
         ("Web Developer", 90000.00, 3),
         ("Mechanical Engineer", 90000.00, 3);
 
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES  ("Bobby", "Will", ),
+        ("Pancho", "Villa", ),
+        ("Stephanie", "Rosales", ),
+        ("Liliana", "Rojos", ),
+        ("Eddie", "Perez", );
 
