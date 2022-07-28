@@ -40,7 +40,40 @@ function displayOptions() {
                 })
                 displayOptions()
                 break;
-         
+            
+            case 'View all roles':
+                employeedb.query(`SELECT * FROM role_type`, function (err, results) {
+                    console.log('hello')
+                    console.table(results);
+                
+                })
+                displayOptions()
+                break;
+
+            case 'View all employees':
+                employeedb.query(`SELECT * FROM employee`, function (err, results) {
+                    console.log('hello')
+                    console.table(results);
+                })
+                displayOptions()
+                break;
+
+            case 'Add a department':
+               
+
+                displayOptions()
+                break;
+
+            case 'Add a role':
+               
+
+                displayOptions()
+                break;
+
+            case 'Add an employee':
+                
+                displayOptions()
+                break;
 
         }
     
@@ -49,24 +82,6 @@ function displayOptions() {
 
 displayOptions()
 
-// function viewAllDepartments() {
-//     employeedb.query('SHOW * FROM department', function (err, results) {
-//         console.log(results);
-//     }) 
-// }
-
-//     employeedb.query('SHOW * FROM role_type', function (err, results) {
-//         console.log(results);
-//     });
-
-//     employeedb.query('SHOW * FROM employee', function (err, results) {
-//         console.log(results);
-//     });
-
-
-//     employeedb.query(' * FROM employee', function (err, results) {
-//         console.log(results);
-//     });
 
 
 
@@ -78,20 +93,3 @@ displayOptions()
 
 
 
-// function displayOptions() {
-//     inquirer
-//     .prompt([
-//         {
-//             type: 'list',
-//             message: 'What would you like to do?',
-//             name: 'options',
-//             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role'],
-//         },
-//     ])
-//     .then(function(answers){
-//         console.log(answers)
-
-//     viewAllDepartments()
-
-// })
-// }
