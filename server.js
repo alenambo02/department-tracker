@@ -32,7 +32,6 @@ function displayOptions() {
     .then((userChoice) => {
         switch(userChoice.options) {
             case 'View all departments':
-               
                 employeedb.query(`SELECT * FROM department`, function (err, results) {
                     console.log('hello')
                     console.table(results);
@@ -42,7 +41,7 @@ function displayOptions() {
                 break;
             
             case 'View all roles':
-                employeedb.query(`SELECT role_type.id, role_type.title, department.name, role_type.salary FROM role_type JOIN department ON role_type.department_id = department.id`, function (err, results) {
+                employeedb.query(`SELECT role_type.title, role_type.id, department.name, role_type.salary FROM role_type JOIN department ON role_type.department_id = department.id`, function (err, results) {
                     console.log('hello')
                     console.table(results);
                 
@@ -51,7 +50,10 @@ function displayOptions() {
                 break;
 
             case 'View all employees':
-                employeedb.query(`SELECT * FROM employee`, function (err, results) {
+                employeedb.query(`SELECT employee.id, employee.first_name, employee.last_name, role_type.title, department.name, role_type.salary, employee.manager_id
+                FROM employee
+                INNER JOIN role_type on employee.role_id = role_type.id
+                INNER JOIN department on role_type.department_id = department.id`, function (err, results) {
                     console.log('hello')
                     console.table(results);
                 })
