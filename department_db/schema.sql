@@ -30,3 +30,5 @@ CREATE TABLE employee (
   REFERENCES employee(id)
   ON DELETE SET NULL
 );
+
+SELECT title, role_id,

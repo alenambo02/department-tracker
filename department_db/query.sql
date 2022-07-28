@@ -1,0 +1,2 @@
+`SELECT role_type.id, role_type.title, department.name, role_type.salary FROM role_type JOIN department ON role_type.department_id = department.id`
+SELECT employee.id, employee.first_name, employee.last_name,
