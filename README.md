@@ -14,7 +14,12 @@
 
   You can see the profile generator layout below:
 
+ 
+
    ![alt text](./assets/ )
+
+   You can view a full demo of this video below:
+  https://drive.google.com/file/d/1PO9SH_3UnzqgtlUufgVJ6kGPTxD3wxCD/view
 
   ## Installation:
   In order to be able to utilize this generator within your command line, you would have to install npm inquirer package and mysql2. Npm inquirer package allows for prompts to be displayed to you within the command line. Mysq12 package allows the user to utilize mysql within their code.
