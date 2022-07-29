@@ -23,7 +23,7 @@ const optionsPrompt = [
         },
 ];
 displayOptions()
- 
+//switch case function allows the user to view and add onto their database
 function displayOptions() {
     inquirer
     .prompt(optionsPrompt)
@@ -77,7 +77,7 @@ function displayOptions() {
 
                 break;
 
-            case 'Add an employeeUpdate an employee role':
+            case 'Update an employee role':
                 
              
                 break;
@@ -92,7 +92,7 @@ function displayOptions() {
 
 
 
-
+// this function allows the user to add another department if needed
 function addDepartment() {
     return new Promise(resolve => {
         inquirer
@@ -102,7 +102,8 @@ function addDepartment() {
             name: 'departmentName',
         })
         .then((answer) => {
-        employeedb.query(`INSERT INTO department (name) VALUES (?)`, [answer.departmentName], 
+//uses mysql to insert a new department into the department table
+        employeedb.query(`INSERT INTO department (name) VALUES (?)`, [answer.departmentName],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -114,9 +115,10 @@ function addDepartment() {
     }) 
 }
 
+// this function allows the user to add another role if needed
 function addRole() {
     return new Promise(async resolve => {
-        const departmentList = await getColumn("name", "department")
+        const departmentList = await getsColumn("name", "department")
         inquirer
         .prompt([
             {
@@ -142,7 +144,8 @@ function addRole() {
         let id
         departmentList.forEach((elem) => {
             if(elem.name === department) id = elem.id
-        })    
+        }) 
+//uses mysql commands to insert a new role into the role_type table    
         employeedb.query(`INSERT INTO role_type (title, salary, department_id) VALUES (?, ?, ?)`, 
         [roleName, salaryAmount, id], 
         (err, result) => {
@@ -156,18 +159,19 @@ function addRole() {
     })
 }
 
+// this function allows the user to add another employee if needed
 function addEmployee() {
     return new Promise(async resolve => {
         const roles = []
-        const column = await getColumn("title","role_type")
+        const column = await getsColumn("title","role_type")
 
         column.forEach((use) => {
             roles.push({"name": use.title, "id": use.id})
         })
 
 
-        const managerFirst = await getColumn("first_name", "employee")
-        const managerLast = await getColumn("last_name", "employee")
+        const managerFirst = await getsColumn("first_name", "employee")
+        const managerLast = await getsColumn("last_name", "employee")
         const managers = []
         managerFirst.forEach((use, index) => {
             managers.push({"name": `${use.first_name} ${managerLast[index].last_name}`, "id" : use.id}) 
@@ -206,7 +210,7 @@ function addEmployee() {
                 if(elem.name === role) roleId = elem.id
                 if(managerID === "None") managerId = null
             })
-
+//uses mysql commands to insert a new employee into the employee table    
             employeedb.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, 
             [first_name, last_name, roleId, managerId],
             (err, result) => {
@@ -224,8 +228,8 @@ function addEmployee() {
 }
 
 
-
-const getColumn = (column, table) => {
+// generic function that I call in order to add roles/employees
+const getsColumn = (column, table) => {
     return new Promise(resolve => {
         employeedb.query(`SELECT ${table}.${column}, ${table}.id FROM ${table}`, (err, result) => {
             resolve(result)

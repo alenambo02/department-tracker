@@ -19,9 +19,9 @@
   ## Installation:
   In order to be able to utilize this generator within your command line, you would have to install npm inquirer package and mysql2. Npm inquirer package allows for prompts to be displayed to you within the command line. Mysq12 package allows the user to utilize mysql within their code.
 
-  Below, I have displayed how I utilized inquirer to prompt questions within the command line:
+  Below, I have displayed how I utilized inquirer to prompt what data a user wants displayed and the table generated from the option the user selected:
 
-   ![alt text](./assets/ )
+   ![alt text](./imgs/table%20.png)
 
 
   ## Usage:
@@ -38,18 +38,20 @@
   If I need to update an employee role then I can select that option as well and I will be prompted to select an employee to update and their new role and this information is updated in the database.
 
 
-  Below, you can view a code snippet of how I utilized mysql to generate tables of data requested:
+  Below, you can view a code snippet of how I utilized mysql to generate tables of specific data request:
 
   ![alt text](./assets/ )
   ```
-    code snippet
+  employeedb.query(`SELECT employee.id, employee.first_name, employee.last_name, role_type.title AS title, department.name, role_type.salary, employee.manager_id AS manager
+                FROM employee
+                INNER JOIN role_type on employee.role_id = role_type.id
+                INNER JOIN department on role_type.department_id = department.id`
+
   ```
 
   ## Credits:
   Helpful video: 
   I utilized https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba to generate markdown license badges.
-
-
  
   ## License:
   MIT 
